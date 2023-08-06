@@ -20,8 +20,10 @@ if add_form:
     st.write(user_name,size_name)
     df2 = pd.DataFrame({"name":[user_name], "size":[size_name]},index=[df.index[-1]+1])
     df = pd.concat([df,df2])
-    df.to_csv("data.csv",index=False)
+    df.to_csv("data1.csv",index=False)
+    st.success("saved")
     st.write(df.tail(5))
+    
 
 # import streamlit as st
 
