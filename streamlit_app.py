@@ -5,7 +5,7 @@ import pandas as pd
 
 st.title("Excel update app")
 
-df = pd.read_csv(r"C:\Users\lalit\Desktop\Projects\shree_seva\data.csv")
+df = pd.read_csv("data.csv")
 # df.drop("Unnamed: 0",inplace=True,axis=0)
 
 st.sidebar.header("Option")
