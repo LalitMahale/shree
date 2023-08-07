@@ -1,48 +1,65 @@
 
-
 import streamlit as st
 import pandas as pd
+from deta import Deta
+import os
+# from dotenv import load_dotenv
+# load_dotenv(".env")
+# key = os.getenv("key")
+key = "d04zgljxeva_WbFhwMJowwp3B7vNgdQViDoDqxfMRFVc"
 
-st.title("Excel update app")
+deta = Deta(key)
 
-df = pd.read_csv("data.csv")
-# df.drop("Unnamed: 0",inplace=True,axis=0)
-
-st.sidebar.header("Option")
-
-option_form = st.sidebar.form("Options_form")
-user_name = option_form.text_input("user_name")
-size_name = option_form.text_input("size_input")
-add_form = option_form.form_submit_button()
+def push_data(db,name,heigth):
+    return db.put({"key":name,"उंची":heigth})
 
 
-if add_form:
-    st.write(user_name,size_name)
-    df2 = pd.DataFrame({"name":[user_name], "size":[size_name]},index=[df.index[-1]+1])
-    df = pd.concat([df,df2])
-    df.to_csv("data1.csv",index=False)
-    st.success("saved")
-    st.write(df.tail(5))
-    
+st.title("|| श्री राम समर्थ || ")
+st.header("वृक्ष सर्वेक्षण")
 
-# import streamlit as st
+st.sidebar.header("प्लॉट निवडा")
+plot = st.sidebar.selectbox("निवडा",["","सरिता पॉलिमर्स","नारायण", "लक्ष्मी ऍग्रो","राकेश ब्रिक्स","सुमरशिंग" ])
 
-# def main():
-#     st.title("Name Selection App")
+if plot == "सरिता पॉलिमर्स":
+    st.title("सरिता पॉलिमर्स")
+    db1 = deta.Base("sarita")
+    name = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि","उपलब्ध नाही"])
+    if name == "उपलब्ध नाही":
+        name = st.text_input("झाडाचे नाव टाका")
+    height = st.number_input("झाडांची उंची",step=1,min_value=1)
+    button = st.button("जतन करा")
+    if button:
+        st.write(f"झाडाचे नाव :{name }")
+        st.write(f"झाडांची उंची : {height }")
+        st.success("यशस्वीरित्या जतन केले ")
+        push_data(db=db1,name=name,heigth=height)
+        st.write(pd.DataFrame(db1.fetch().items).tail(5))
+elif plot == "नारायण":
+    st.title("नारायण")
+    name = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि"])
+    st.write(name)
+    height = st.number_input("झाडांची उंची",step=1,min_value=1)
+    st.write(height)
+elif plot == "लक्ष्मी ऍग्रो":
+    st.title("लक्ष्मी ऍग्रो")
+    name = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि"])
+    st.write(name)
+    height = st.number_input("झाडांची उंची",step=1,min_value=1)
+    st.write(height)
+elif plot == "राकेश ब्रिक्स":
+    st.title("राकेश ब्रिक्स")
+    name = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि"])
+    st.write(name)
+    height = st.number_input("झाडांची उंची",step=1,min_value=1)
+    st.write(height)
+elif plot == "सुमरशिंग":
+    st.title("सुमरशिंग")
+    name = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि"])
+    st.write(name)
+    height = st.number_input("झाडांची उंची",step=1,min_value=1)
+    st.write(height)
+else:
+    st.write("select plot from left side menu")
 
-#     # Predefined list of names
-#     predefined_names = ["lalit", "rahul"]
 
-#     # Dropdown to select a name from the predefined list
-#     selected_name = st.selectbox("Select a name:", [""] + predefined_names)
 
-#     # If the selected name is not in the predefined list, allow manual input
-#     if selected_name == "":
-#         manual_name = st.text_input("Enter a name:")
-#         if manual_name:
-#             st.success(f"Manually entered name: {manual_name}")
-#     else:
-#         st.success(f"Selected name: {selected_name}")
-
-# if __name__ == "__main__":
-#     main()
