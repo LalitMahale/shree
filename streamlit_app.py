@@ -14,6 +14,11 @@ def push_data(db,name,heigth):
     # st.write(db.fetch().count)
     return db.put({"key":str(db.fetch().count+1),"झाडाचे_नाव":name,"उंची":str(heigth)})
 
+def update(db,key,name,heigth):
+    # st.write(db.fetch().count)
+    return db1.update(updates={"झाडाचे_नाव":name,"उंची":str(height)},key=str(key))
+
+
 st.markdown("""<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">""", unsafe_allow_html=True)
 
 # Center-aligned title with tree icons
@@ -40,16 +45,33 @@ if plot == "सरिता पॉलिमर्स":
     name = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि","उपलब्ध नाही"])
     if name == "उपलब्ध नाही":
         name = st.text_input("झाडाचे नाव टाका")
+    if name == "":
+        st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
-    button = st.button("जतन करा")
-    if button:
-        # sr = db1.fetch().count + 1
+
+  
+    button_save = st.button("जतन करा")
+    
+    button_update = st.button("बदल करा")
+
+    if button_save :
         push_data(db=db1, name=name,heigth=height)
         st.write(f"झाडाचे नाव :{name }")
         st.write(f"झाडांची उंची : {height }")
         st.success("यशस्वीरित्या जतन केले ")
         # st.write(db1.fetch().items)
         st.write(pd.DataFrame(db1.fetch().items).tail(5))
+
+    # if button_update :
+    #     key = st.number_input("Key",step=1,min_value=1)
+    #     u = st.button("बदल करा ")
+
+    #     if u == True:
+    #         update(db1,key,name,height)
+    #         st.success("बदल केला")
+    #         st.write(pd.DataFrame(db1.get(str(key)),index=[0]))
+
+  
 
 
 
@@ -59,6 +81,8 @@ elif plot == "नारायण":
     name = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि","उपलब्ध नाही"])
     if name == "उपलब्ध नाही":
         name = st.text_input("झाडाचे नाव टाका")
+    if name == "":
+        st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
     button = st.button("जतन करा")
     if button:
@@ -76,6 +100,8 @@ elif plot == "लक्ष्मी ऍग्रो":
     name = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि","उपलब्ध नाही"])
     if name == "उपलब्ध नाही":
         name = st.text_input("झाडाचे नाव टाका")
+    if name == "":
+        st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
     button = st.button("जतन करा")
     if button:
@@ -92,6 +118,8 @@ elif plot == "राकेश ब्रिक्स":
     name = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि","उपलब्ध नाही"])
     if name == "उपलब्ध नाही":
         name = st.text_input("झाडाचे नाव टाका")
+    if name == "":
+        st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
     button = st.button("जतन करा")
     if button:
@@ -101,7 +129,7 @@ elif plot == "राकेश ब्रिक्स":
         st.write(f"झाडांची उंची : {height }")
         st.success("यशस्वीरित्या जतन केले ")
         # st.write(db1.fetch().items)
-        st.write(pd.DataFrame(db4.fetch().items).tail(5))
+        st.write(pd.DataFrame(db4.fetch().items).set_index("key").tail(5))
 
     
 elif plot == "सुमरशिंग":
@@ -110,6 +138,8 @@ elif plot == "सुमरशिंग":
     name = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि","उपलब्ध नाही"])
     if name == "उपलब्ध नाही":
         name = st.text_input("झाडाचे नाव टाका")
+    if name == "":
+        st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
     button = st.button("जतन करा")
     if button:
