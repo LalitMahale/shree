@@ -59,7 +59,6 @@ if plot == "सरिता पॉलिमर्स":
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
 
     container = st.container()
-
     with container:
         # Create buttons to open the form and to contact us
         col1, col2, col3 = st.columns(3)
@@ -84,6 +83,7 @@ if plot == "सरिता पॉलिमर्स":
         else:
             st.warning("कृपया योग्य माहिती प्रविष्ट करा")
 
+
     # if button_update :
     #     update(db = db1)
         # key = st.number_input("Key",step=1,min_value=1)
@@ -107,12 +107,22 @@ elif plot == "नारायण":
     if name == "":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
-    button = st.button("जतन करा")
-    if button:
-        # sr = db1.fetch().count + 1
+
+    container = st.container()
+    with container:
+        # Create buttons to open the form and to contact us
+        col1, col2, col3 = st.columns(3)
+
+        show_form2 = col1.button("जतन करा")
+        # button_update = col2.button("बदल करा")
+        selected_option = col3.selectbox("झाडाचे फोटो पहा", ["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि"])
+        if selected_option != "":
+            photo(selected_option)
+
+    if show_form2 :
         sr = str(db2.fetch().count+1)
         if name != "" or name != " ":
-            push_data(db=db2, name=name,heigth=height,sr=sr)  
+            push_data(db=db2, name=name,heigth=height,sr=sr)
             st.write("key :",sr)
             st.write(f"झाडाचे नाव :{name }")
             st.write(f"झाडांची उंची : {height }")
@@ -121,6 +131,9 @@ elif plot == "नारायण":
             st.write(pd.DataFrame(db2.fetch().items).tail(5))
         else:
             st.warning("कृपया योग्य माहिती प्रविष्ट करा")
+
+
+
 
 elif plot == "लक्ष्मी ऍग्रो":
     st.title("लक्ष्मी ऍग्रो")
@@ -131,8 +144,20 @@ elif plot == "लक्ष्मी ऍग्रो":
     if name == "" or name == " ":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
-    button = st.button("जतन करा")
-    if button:
+
+
+    container = st.container()
+    with container:
+        # Create buttons to open the form and to contact us
+        col1, col2, col3 = st.columns(3)
+
+        show_form3 = col1.button("जतन करा")
+        # button_update = col2.button("बदल करा")
+        selected_option = col3.selectbox("झाडाचे फोटो पहा", ["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि"])
+        if selected_option != "":
+            photo(selected_option)
+
+    if show_form3 :
         sr = str(db3.fetch().count+1)
         if name != "" or name != " ":
             push_data(db=db3, name=name,heigth=height,sr=sr)
@@ -140,9 +165,10 @@ elif plot == "लक्ष्मी ऍग्रो":
             st.write(f"झाडाचे नाव :{name }")
             st.write(f"झाडांची उंची : {height }")
             st.success("यशस्वीरित्या जतन केले ")
+            # st.write(db1.fetch().items)
             st.write(pd.DataFrame(db3.fetch().items).tail(5))
         else:
-            st.warning("कृपया योग्य माहिती प्रविष्ट करा")           
+            st.warning("कृपया योग्य माहिती प्रविष्ट करा")
 
     
 elif plot == "राकेश ब्रिक्स":
@@ -154,9 +180,20 @@ elif plot == "राकेश ब्रिक्स":
     if name == "" or name == " ":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
-    button = st.button("जतन करा")
-    if button:
-        # sr = db1.fetch().count + 1
+
+
+    container = st.container()
+    with container:
+        # Create buttons to open the form and to contact us
+        col1, col2, col3 = st.columns(3)
+
+        show_form4 = col1.button("जतन करा")
+        # button_update = col2.button("बदल करा")
+        selected_option = col3.selectbox("झाडाचे फोटो पहा", ["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि"])
+        if selected_option != "":
+            photo(selected_option)
+
+    if show_form4:
         sr = str(db4.fetch().count+1)
         if name != "" or name != " ":
             push_data(db=db4, name=name,heigth=height,sr=sr)
@@ -165,9 +202,10 @@ elif plot == "राकेश ब्रिक्स":
             st.write(f"झाडांची उंची : {height }")
             st.success("यशस्वीरित्या जतन केले ")
             # st.write(db1.fetch().items)
-            st.write(pd.DataFrame(db4.fetch().items).set_index("key").tail(5))
+            st.write(pd.DataFrame(db4.fetch().items).tail(5))
         else:
-            st.warning("कृपया योग्य माहिती प्रविष्ट करा")              
+            st.warning("कृपया योग्य माहिती प्रविष्ट करा")
+   
 
     
 elif plot == "सुमरशिंग":
@@ -179,8 +217,20 @@ elif plot == "सुमरशिंग":
     if name == "" or name == " ":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
-    button = st.button("जतन करा")
-    if button:
+
+    
+    container = st.container()
+    with container:
+        # Create buttons to open the form and to contact us
+        col1, col2, col3 = st.columns(3)
+
+        show_form5 = col1.button("जतन करा")
+        # button_update = col2.button("बदल करा")
+        selected_option = col3.selectbox("झाडाचे फोटो पहा", ["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि"])
+        if selected_option != "":
+            photo(selected_option)
+
+    if show_form5:
         sr = str(db5.fetch().count+1)
         if name != "" or name != " ":
             push_data(db=db5, name=name,heigth=height,sr=sr)
@@ -191,7 +241,8 @@ elif plot == "सुमरशिंग":
             # st.write(db1.fetch().items)
             st.write(pd.DataFrame(db5.fetch().items).tail(5))
         else:
-            st.warning("कृपया योग्य माहिती प्रविष्ट करा") 
+            st.warning("कृपया योग्य माहिती प्रविष्ट करा")
+
 
 
 
