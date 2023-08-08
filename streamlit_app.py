@@ -71,15 +71,18 @@ if plot == "सरिता पॉलिमर्स":
             photo(selected_option)
 
 
-    # if show_form :
-    #     sr = str(db1.fetch().count+1)
-    #     push_data(db=db1, name=name,heigth=height,sr=sr)
-    #     st.write("key :",sr)
-    #     st.write(f"झाडाचे नाव :{name }")
-    #     st.write(f"झाडांची उंची : {height }")
-    #     st.success("यशस्वीरित्या जतन केले ")
-    #     # st.write(db1.fetch().items)
-    #     st.write(pd.DataFrame(db1.fetch().items).tail(5))
+    if show_form :
+        sr = str(db1.fetch().count+1)
+        if name != "" or name != " ":
+            push_data(db=db1, name=name,heigth=height,sr=sr)
+            st.write("key :",sr)
+            st.write(f"झाडाचे नाव :{name }")
+            st.write(f"झाडांची उंची : {height }")
+            st.success("यशस्वीरित्या जतन केले ")
+            # st.write(db1.fetch().items)
+            st.write(pd.DataFrame(db1.fetch().items).tail(5))
+        else:
+            st.warning("कृपया योग्य माहिती प्रविष्ट करा")
 
     # if button_update :
     #     update(db = db1)
