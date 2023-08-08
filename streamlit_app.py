@@ -14,9 +14,27 @@ def push_data(db,name,heigth,sr):
     # st.write(db.fetch().count)
     return db.put({"key":sr,"झाडाचे_नाव":name,"उंची":str(heigth)})
 
-def update(db,key,name,heigth):
-    # st.write(db.fetch().count)
-    return db1.update(updates={"झाडाचे_नाव":name,"उंची":str(height)},key=str(key))
+# def update(db,key,name,heigth):
+#     # st.write(db.fetch().count)
+#     return db1.update(updates={"झाडाचे_नाव":name,"उंची":str(height)},key=str(key))
+
+def update(db):
+    st.write("Please fill out the form below:")
+    key = st.number_input("Key",step=1,min_value=1)
+    height = st.number_input(" झाडांची उंची ",step=1,min_value=1)
+    name = st.selectbox(" झाडाचे नाव निवडा ",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि","उपलब्ध नाही"])
+
+    # message = st.text_area("Message")
+    submit_button = st.button("बदल जतन करा")
+    if submit_button:
+        db.update(updates={"झाडाचे_नाव":name,"उंची":str(height)},key=str(key))
+        st.success("बदल यशस्वीरित्या जतन केले!")
+
+def photo(name):
+    data = {"कडू लिंब":"neem.jpg","पिंपळ":"pimpal.jpeg","वड":"vad.jpeg","आंब्या":"mango.jpeg","निलगि":"nilgari.jpg",
+            "कविट":"kavit.jpg"}
+    st.image(data[name])
+    st.write(name)
 
 st.markdown("""<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">""", unsafe_allow_html=True)
 
@@ -27,15 +45,6 @@ st.markdown("<h1 style='text-align: center; font-size: 28px;'>|| श्री �
 st.markdown("<h1 style='text-align: center; font-size: 28px;'> <i class='fa fa-tree'></i> वृक्ष सर्वेक्षण  <i class='fa fa-tree'></i> </h1>", unsafe_allow_html=True)
 
 
-# st.markdown("<h2 style='text-align: center; font-size: 24px;'>वृक्ष सर्वेक्षण</h2>", unsafe_allow_html=True)
-
-# st.sidebar.markdown("<h2 style='text-align: center;'>प्लॉट निवडा</h2>", unsafe_allow_html=True)
-
-
-# st.title("|| श्री ||")
-# st.title( "|| श्री राम समर्थ || ")
-# st.header("वृक्ष सर्वेक्षण")
-# st.sidebar.header("प्लॉट निवडा")
 plot = st.selectbox("प्लॉट निवडा",["","सरिता पॉलिमर्स","नारायण", "लक्ष्मी ऍग्रो","राकेश ब्रिक्स","सुमरशिंग" ])
 
 
@@ -49,12 +58,31 @@ if plot == "सरिता पॉलिमर्स":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
 
-  
-    button_save = st.button("जतन करा")
-    
-    button_update = st.button("बदल करा")
+    container = st.container()
 
-    if button_save :
+    with container:
+        # Create buttons to open the form and to contact us
+        col1, col2, col3 = st.columns(3)
+
+        show_form = col1.button("जतन करा")
+        # button_update = col2.button("बदल करा")
+        selected_option = col3.selectbox("झाडाचे फोटो पहा", ["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि"])
+        if selected_option != "":
+            photo(selected_option)
+
+        # if show_form:
+        #     open_form()
+
+        # if contact_us:
+        #     open_contact()
+
+
+  
+    # button_save = st.button("जतन करा")
+    
+    # button_update = st.button("बदल करा")
+
+    if show_form :
         sr = str(db1.fetch().count+1)
         push_data(db=db1, name=name,heigth=height)
         st.write("key :",sr)
@@ -65,13 +93,14 @@ if plot == "सरिता पॉलिमर्स":
         st.write(pd.DataFrame(db1.fetch().items).tail(5))
 
     # if button_update :
-    #     key = st.number_input("Key",step=1,min_value=1)
-    #     u = st.button("बदल करा ")
+    #     update(db = db1)
+        # key = st.number_input("Key",step=1,min_value=1)
+        # u = st.button("बदल करा ")
 
-    #     if u == True:
-    #         update(db1,key,name,height)
-    #         st.success("बदल केला")
-    #         st.write(pd.DataFrame(db1.get(str(key)),index=[0]))
+        # if u == True:
+        #     update(db1,key,name,height)
+        #     st.success("बदल केला")
+        #     st.write(pd.DataFrame(db1.get(str(key)),index=[0]))
 
   
 
@@ -217,3 +246,19 @@ with contact_container:
                     "<a href='tel:+918087830153' target='_blank'>"
                     "<button style='padding: 10px 20px;'>संपर्क साधा</button>"
                     "</a></div>", unsafe_allow_html=True)
+
+    # Create a Spacer to push the content up and create space for the footer
+# st.markdown("<div style='height: 20vh'></div>", unsafe_allow_html=True)
+
+# # Create a container to hold the buttons
+# buttons_container = st.container()
+# with buttons_container:
+#     # Right-align the buttons at the bottom
+#     st.markdown("<div style='position: fixed; bottom: 10px; right: 10px; text-align: right;'>"
+#                 "<a href='https://example.com/contact' target='_blank'>"
+#                 "<button style='padding: 10px 20px; margin-right: 10px;'>Contact Us</button>"
+#                 "</a>"
+#                 "<a href='https://example.com/another-link' target='_blank'>"
+#                 "<button style='padding: 10px 20px;'>Contact Us 2</button>"
+#                 "</a>"
+#                 "</div>", unsafe_allow_html=True)
