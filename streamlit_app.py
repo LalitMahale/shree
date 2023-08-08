@@ -244,7 +244,7 @@ with contact_container:
         # Right-align the button at the bottom
         st.markdown("<div style='position: fixed; bottom: 10px; right: 150px; text-align: right;'>"
                     "<a href='tel:+918087830153' target='_blank'>"
-                    "<button style='padding: 10px 20px;'>संपर्क साधा</button>"
+                    "<button style='padding: 8px 15px;'>संपर्क साधा</button>"
                     "</a></div>", unsafe_allow_html=True)
 
     # Create a Spacer to push the content up and create space for the footer
