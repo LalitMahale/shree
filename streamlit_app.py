@@ -70,27 +70,16 @@ if plot == "सरिता पॉलिमर्स":
         if selected_option != "":
             photo(selected_option)
 
-        # if show_form:
-        #     open_form()
 
-        # if contact_us:
-        #     open_contact()
-
-
-  
-    # button_save = st.button("जतन करा")
-    
-    # button_update = st.button("बदल करा")
-
-    if show_form :
-        sr = str(db1.fetch().count+1)
-        push_data(db=db1, name=name,heigth=height)
-        st.write("key :",sr)
-        st.write(f"झाडाचे नाव :{name }")
-        st.write(f"झाडांची उंची : {height }")
-        st.success("यशस्वीरित्या जतन केले ")
-        # st.write(db1.fetch().items)
-        st.write(pd.DataFrame(db1.fetch().items).tail(5))
+    # if show_form :
+    #     sr = str(db1.fetch().count+1)
+    #     push_data(db=db1, name=name,heigth=height,sr=sr)
+    #     st.write("key :",sr)
+    #     st.write(f"झाडाचे नाव :{name }")
+    #     st.write(f"झाडांची उंची : {height }")
+    #     st.success("यशस्वीरित्या जतन केले ")
+    #     # st.write(db1.fetch().items)
+    #     st.write(pd.DataFrame(db1.fetch().items).tail(5))
 
     # if button_update :
     #     update(db = db1)
@@ -119,16 +108,16 @@ elif plot == "नारायण":
     if button:
         # sr = db1.fetch().count + 1
         sr = str(db2.fetch().count+1)
-        push_data(db=db2, name=name,heigth=height,sr=sr)
-
-        st.write("key :",sr)
-
-
-        st.write(f"झाडाचे नाव :{name }")
-        st.write(f"झाडांची उंची : {height }")
-        st.success("यशस्वीरित्या जतन केले ")
-        # st.write(db1.fetch().items)
-        st.write(pd.DataFrame(db2.fetch().items).tail(5))
+        if name != "" or name != " ":
+            push_data(db=db2, name=name,heigth=height,sr=sr)  
+            st.write("key :",sr)
+            st.write(f"झाडाचे नाव :{name }")
+            st.write(f"झाडांची उंची : {height }")
+            st.success("यशस्वीरित्या जतन केले ")
+            # st.write(db1.fetch().items)
+            st.write(pd.DataFrame(db2.fetch().items).tail(5))
+        else:
+            st.warning("कृपया योग्य माहिती प्रविष्ट करा")
 
 elif plot == "लक्ष्मी ऍग्रो":
     st.title("लक्ष्मी ऍग्रो")
@@ -142,13 +131,15 @@ elif plot == "लक्ष्मी ऍग्रो":
     button = st.button("जतन करा")
     if button:
         sr = str(db3.fetch().count+1)
-        push_data(db=db3, name=name,heigth=height,sr=sr)
-        st.write("key :",sr)
-
-        st.write(f"झाडाचे नाव :{name }")
-        st.write(f"झाडांची उंची : {height }")
-        st.success("यशस्वीरित्या जतन केले ")
-        st.write(pd.DataFrame(db3.fetch().items).tail(5))
+        if name != "" or name != " ":
+            push_data(db=db3, name=name,heigth=height,sr=sr)
+            st.write("key :",sr)
+            st.write(f"झाडाचे नाव :{name }")
+            st.write(f"झाडांची उंची : {height }")
+            st.success("यशस्वीरित्या जतन केले ")
+            st.write(pd.DataFrame(db3.fetch().items).tail(5))
+        else:
+            st.warning("कृपया योग्य माहिती प्रविष्ट करा")           
 
     
 elif plot == "राकेश ब्रिक्स":
@@ -164,13 +155,16 @@ elif plot == "राकेश ब्रिक्स":
     if button:
         # sr = db1.fetch().count + 1
         sr = str(db4.fetch().count+1)
-        push_data(db=db4, name=name,heigth=height)
-        st.write("key :",sr)
-        st.write(f"झाडाचे नाव :{name }")
-        st.write(f"झाडांची उंची : {height }")
-        st.success("यशस्वीरित्या जतन केले ")
-        # st.write(db1.fetch().items)
-        st.write(pd.DataFrame(db4.fetch().items).set_index("key").tail(5))
+        if name != "" or name != " ":
+            push_data(db=db4, name=name,heigth=height,sr=sr)
+            st.write("key :",sr)
+            st.write(f"झाडाचे नाव :{name }")
+            st.write(f"झाडांची उंची : {height }")
+            st.success("यशस्वीरित्या जतन केले ")
+            # st.write(db1.fetch().items)
+            st.write(pd.DataFrame(db4.fetch().items).set_index("key").tail(5))
+        else:
+            st.warning("कृपया योग्य माहिती प्रविष्ट करा")              
 
     
 elif plot == "सुमरशिंग":
@@ -185,13 +179,16 @@ elif plot == "सुमरशिंग":
     button = st.button("जतन करा")
     if button:
         sr = str(db5.fetch().count+1)
-        push_data(db=db5, name=name,heigth=height)
-        st.write("key :",sr)
-        st.write(f"झाडाचे नाव :{name }")
-        st.write(f"झाडांची उंची : {height }")
-        st.success("यशस्वीरित्या जतन केले ")
-        # st.write(db1.fetch().items)
-        st.write(pd.DataFrame(db5.fetch().items).tail(5))
+        if name != "" or name != " ":
+            push_data(db=db5, name=name,heigth=height,sr=sr)
+            st.write("key :",sr)
+            st.write(f"झाडाचे नाव :{name }")
+            st.write(f"झाडांची उंची : {height }")
+            st.success("यशस्वीरित्या जतन केले ")
+            # st.write(db1.fetch().items)
+            st.write(pd.DataFrame(db5.fetch().items).tail(5))
+        else:
+            st.warning("कृपया योग्य माहिती प्रविष्ट करा") 
 
 
 
@@ -244,7 +241,7 @@ with contact_container:
         # Right-align the button at the bottom
         st.markdown("<div style='position: fixed; bottom: 10px; right: 100px; text-align: right;'>"
                     "<a href='tel:+918087830153' target='_blank'>"
-                    "<button style='padding: 8px 15px;'>संपर्क साधा</button>"
+                    "<button style='padding: 10px 20px;'>संपर्क साधा</button>"
                     "</a></div>", unsafe_allow_html=True)
 
     # Create a Spacer to push the content up and create space for the footer
