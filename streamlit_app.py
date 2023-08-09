@@ -1,4 +1,4 @@
-
+from googletrans import Translator
 import streamlit as st
 import pandas as pd
 from deta import Deta
@@ -9,6 +9,7 @@ import os
 key = "d04zgljxeva_WbFhwMJowwp3B7vNgdQViDoDqxfMRFVc"
 
 deta = Deta(key)
+translator = Translator()
 
 def push_data(db,name,heigth,sr):
     # st.write(db.fetch().count)
@@ -36,6 +37,30 @@ def photo(name):
     st.image(data[name])
     st.write(name)
 
+
+def translate_to_marathi(english_text):
+    if english_text:
+        translation = translator.translate(english_text, src='en', dest='mr')
+        return translation.text
+    return ""
+
+background_image = "neem.jpg"
+background_color = "rgba(255, 255, 255, 0.9)"  # Background color with opacity
+
+# Apply the background image and color
+page_bg_img = f"""
+<style>
+body {{
+    background: url({background_image});
+    background-size: cover;
+    background-color: {background_color};
+}}
+</style>
+"""
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
+
+
 st.markdown("""<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">""", unsafe_allow_html=True)
 
 # Center-aligned title with tree icons
@@ -53,7 +78,9 @@ if plot == "सरिता पॉलिमर्स":
     db1 = deta.Base("sarita")
     name = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि","उपलब्ध नाही"])
     if name == "उपलब्ध नाही":
-        name = st.text_input("झाडाचे नाव टाका")
+        english_text = st.text_input("झाडाचे नाव टाका")
+        name = translate_to_marathi(english_text)
+        st.info("Translated to Marathi:", name)
     if name == "" or name == " ":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
@@ -103,7 +130,9 @@ elif plot == "नारायण":
     db2 = deta.Base("narayan")
     name = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि","उपलब्ध नाही"])
     if name == "उपलब्ध नाही":
-        name = st.text_input("झाडाचे नाव टाका")
+        english_text = st.text_input("झाडाचे नाव टाका")
+        name = translate_to_marathi(english_text)
+        st.info("Translated to Marathi:", name)
     if name == "":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
@@ -140,7 +169,9 @@ elif plot == "लक्ष्मी ऍग्रो":
     db3 = deta.Base("laxmi")
     name = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि","उपलब्ध नाही"])
     if name == "उपलब्ध नाही":
-        name = st.text_input("झाडाचे नाव टाका")
+        english_text = st.text_input("झाडाचे नाव टाका")
+        name = translate_to_marathi(english_text)
+        st.info("Translated to Marathi:", name)
     if name == "" or name == " ":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
@@ -176,7 +207,9 @@ elif plot == "राकेश ब्रिक्स":
     db4 = deta.Base("rakesh")
     name = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि","उपलब्ध नाही"])
     if name == "उपलब्ध नाही":
-        name = st.text_input("झाडाचे नाव टाका")
+        english_text = st.text_input("झाडाचे नाव टाका")
+        name = translate_to_marathi(english_text)
+        st.info("Translated to Marathi:", name)
     if name == "" or name == " ":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
@@ -213,7 +246,9 @@ elif plot == "सुमरशिंग":
     db5 = deta.Base("sumershing")
     name = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि","उपलब्ध नाही"])
     if name == "उपलब्ध नाही":
-        name = st.text_input("झाडाचे नाव टाका")
+        english_text = st.text_input("झाडाचे नाव टाका")
+        name = translate_to_marathi(english_text)
+        st.info("Translated to Marathi:", name)
     if name == "" or name == " ":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
@@ -244,7 +279,10 @@ elif plot == "सुमरशिंग":
             st.warning("कृपया योग्य माहिती प्रविष्ट करा")
 
 
-
+@st.cache
+def convert_df(df):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return df.to_csv().encode('utf-8')
 
 bar = st.sidebar.selectbox("संपूर्ण डेटा पाहण्यासाठी प्लॉट निवडा",["","सरिता पॉलिमर्स","नारायण", "लक्ष्मी ऍग्रो","राकेश ब्रिक्स","सुमरशिंग" ])
 
@@ -254,6 +292,7 @@ if bar == "सरिता पॉलिमर्स":
     b = st.sidebar.button("पहा")
     if b:
         st.sidebar.write(pd.DataFrame(db1.fetch().items))
+        
 
 elif bar == "नारायण":
     st.sidebar.write("निवडले :- नारायण")
@@ -282,7 +321,9 @@ elif bar == "सुमरशिंग":
     db1 = deta.Base("sumershing")
     b = st.sidebar.button("पहा")
     if b:
-        st.sidebar.write(pd.DataFrame(db1.fetch().items))
+        df = pd.DataFrame(db1.fetch().items)
+        st.sidebar.write(df)
+
 
 
 
