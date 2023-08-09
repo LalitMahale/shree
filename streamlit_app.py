@@ -81,7 +81,7 @@ if plot == "सरिता पॉलिमर्स":
         english_text = st.text_input("झाडाचे नाव टाका")
         name1 = translate_to_marathi(english_text)
         st.success(f"Translated to Marathi: {name1}")
-    if name1 == "" or name == " ":
+    if name1 == "" or name1 == " ":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
 
