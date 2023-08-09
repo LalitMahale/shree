@@ -321,13 +321,13 @@ elif bar == "सुमरसिंग":
     if b:
         df = pd.DataFrame(db1.fetch().items)
         st.sidebar.write(df)
-        csv = df.to_csv(file_name="सुमरसिंग.csv")
-        st.download_button(
-            label="Download data as CSV",
-            data=csv,
+        # csv = df.to_csv(file_name="सुमरसिंग.csv")
+        # st.download_button(
+        #     label="Download data as CSV",
+        #     data=csv,
             
-            mime='text/csv',
-        )
+        #     mime='text/csv',
+        # )
 
 
 
