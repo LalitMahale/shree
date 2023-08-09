@@ -208,7 +208,7 @@ elif plot == "राकेश ब्रिक्स":
     name4 = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंब्या","पिंपळ","निलगि","उपलब्ध नाही"])
     if name4 == "उपलब्ध नाही":
         english_text = st.text_input("झाडाचे नाव टाका")
-        name 4= translate_to_marathi(english_text)
+        name4 = translate_to_marathi(english_text)
         st.success(f"Translated to Marathi: {name4}")
     if name4 == "" or name4 == " ":
         st.error("कृपया वैध नाव प्रविष्ट करा")
