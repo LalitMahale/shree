@@ -80,7 +80,7 @@ if plot == "सरिता पॉलिमर्स":
     if name == "उपलब्ध नाही":
         english_text = st.text_input("झाडाचे नाव टाका")
         name = translate_to_marathi(english_text)
-        st.info("Translated to Marathi:", name)
+        st.info(f"Translated to Marathi: {name}",icon = "-->")
     if name == "" or name == " ":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
@@ -132,7 +132,7 @@ elif plot == "नारायण":
     if name == "उपलब्ध नाही":
         english_text = st.text_input("झाडाचे नाव टाका")
         name = translate_to_marathi(english_text)
-        st.info("Translated to Marathi:", name)
+        st.info(f"Translated to Marathi: {name}",icon = "-->")
     if name == "":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
@@ -171,7 +171,7 @@ elif plot == "लक्ष्मी ऍग्रो":
     if name == "उपलब्ध नाही":
         english_text = st.text_input("झाडाचे नाव टाका")
         name = translate_to_marathi(english_text)
-        st.info("Translated to Marathi:", name)
+        st.info(f"Translated to Marathi: {name}",icon = "-->")
     if name == "" or name == " ":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
@@ -209,7 +209,7 @@ elif plot == "राकेश ब्रिक्स":
     if name == "उपलब्ध नाही":
         english_text = st.text_input("झाडाचे नाव टाका")
         name = translate_to_marathi(english_text)
-        st.info("Translated to Marathi:", name)
+        st.info(f"Translated to Marathi: {name}",icon = "-->")
     if name == "" or name == " ":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
@@ -248,7 +248,7 @@ elif plot == "सुमरशिंग":
     if name == "उपलब्ध नाही":
         english_text = st.text_input("झाडाचे नाव टाका")
         name = translate_to_marathi(english_text)
-        st.info("Translated to Marathi:", name)
+        st.info(f"Translated to Marathi: {name}",icon = "-->")
     if name == "" or name == " ":
         st.error("कृपया वैध नाव प्रविष्ट करा")
     height = st.number_input("झाडांची उंची",step=1,min_value=1)
