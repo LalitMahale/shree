@@ -67,6 +67,7 @@ st.markdown("""<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/li
 
 st.markdown("<h1 style='text-align: center; font-size: 28px;'>|| श्री ||</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center; font-size: 28px;'>|| श्री राम समर्थ ||</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; font-size: 28px;'>|| जय जय रघुवीर समर्थ ||</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center; font-size: 28px;'> <i class='fa fa-tree'></i> वृक्ष सर्वेक्षण  <i class='fa fa-tree'></i> </h1>", unsafe_allow_html=True)
 
 
