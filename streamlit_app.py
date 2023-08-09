@@ -32,7 +32,7 @@ def update(db):
         st.success("बदल यशस्वीरित्या जतन केले!")
 
 def photo(name):
-    data = {"कडू लिंब":"neem.jpg","पिंपळ":"pimpal.jpeg","वड":"vad.jpeg","आंबा":"mango.jpeg","निलगि","सिसम":"nilgari.jpg",
+    data = {"कडू लिंब":"neem.jpg","पिंपळ":"pimpal.jpeg","वड":"vad.jpeg","आंबा":"mango.jpeg","निलगि":"nilgari.jpg","सिसम":"nilgari.jpg",
             "कविट":"kavit.jpg"}
     st.image(data[name])
     st.write(name)
