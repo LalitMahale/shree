@@ -32,7 +32,7 @@ def update(db):
         st.success("बदल यशस्वीरित्या जतन केले!")
 
 def photo(name):
-    data = {"कडू लिंब":"neem.jpg","पिंपळ":"pimpal.jpeg","वड":"vad.jpeg","आंबा":"mango.jpeg","निलगि":"nilgari.jpg","सिसम":"nilgari.jpg",
+    data = {"कडू लिंब":"neem.jpg","पिंपळ":"pimpal.jpeg","वड":"vad.jpeg","आंबा":"mango.jpeg","निलगि","सिसम":"nilgari.jpg",
             "कविट":"kavit.jpg"}
     st.image(data[name])
     st.write(name)
@@ -67,10 +67,11 @@ st.markdown("""<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/li
 
 st.markdown("<h1 style='text-align: center; font-size: 28px;'>|| श्री ||</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center; font-size: 28px;'>|| श्री राम समर्थ ||</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; font-size: 28px;'>||  जय जय रघुवीर समर्थ ||</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center; font-size: 28px;'> <i class='fa fa-tree'></i> वृक्ष सर्वेक्षण  <i class='fa fa-tree'></i> </h1>", unsafe_allow_html=True)
 
 
-plot = st.selectbox("प्लॉट निवडा",["","सरिता पॉलिमर्स","नारायण", "लक्ष्मी ऍग्रो","राकेश ब्रिक्स","सुमरशिंग" ])
+plot = st.selectbox("प्लॉट निवडा",["","सरिता पॉलिमर्स","नारायण", "लक्ष्मी ऍग्रो","राकेश ब्रिक्स","सुमरसिंग" ])
 
 
 if plot == "सरिता पॉलिमर्स":
@@ -241,8 +242,8 @@ elif plot == "राकेश ब्रिक्स":
    
 
     
-elif plot == "सुमरशिंग":
-    st.title("सुमरशिंग")
+elif plot == "सुमरसिंग":
+    st.title("सुमरसिंग")
     db5 = deta.Base("sumershing")
     name5 = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंबा","पिंपळ","निलगि","सिसम","उपलब्ध नाही"])
     if name5 == "उपलब्ध नाही":
@@ -281,7 +282,7 @@ elif plot == "सुमरशिंग":
 
 
 
-bar = st.sidebar.selectbox("संपूर्ण डेटा पाहण्यासाठी प्लॉट निवडा",["","सरिता पॉलिमर्स","नारायण", "लक्ष्मी ऍग्रो","राकेश ब्रिक्स","सुमरशिंग" ])
+bar = st.sidebar.selectbox("संपूर्ण डेटा पाहण्यासाठी प्लॉट निवडा",["","सरिता पॉलिमर्स","नारायण", "लक्ष्मी ऍग्रो","राकेश ब्रिक्स","सुमरसिंग" ])
 
 if bar == "सरिता पॉलिमर्स":
     st.sidebar.write("निवडले :- सरिता पॉलिमर्स")
@@ -313,14 +314,14 @@ elif bar == "राकेश ब्रिक्स":
     if b:
         st.sidebar.write(pd.DataFrame(db1.fetch().items))
 
-elif bar == "सुमरशिंग":
-    st.sidebar.write("निवडले :- सुमरशिंग")
+elif bar == "सुमरसिंग":
+    st.sidebar.write("निवडले :- सुमरसिंग")
     db1 = deta.Base("sumershing")
     b = st.sidebar.button("पहा")
     if b:
         df = pd.DataFrame(db1.fetch().items)
         st.sidebar.write(df)
-        csv = df.to_csv(file_name="सुमरशिंग.csv")
+        csv = df.to_csv(file_name="सुमरसिंग.csv")
         st.download_button(
             label="Download data as CSV",
             data=csv,
