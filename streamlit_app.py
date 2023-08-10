@@ -129,8 +129,7 @@ if plot == "सरिता पॉलिमर्स":
 elif plot == "नारायण":
     st.title("नारायण")
     db2 = deta.Base("narayan")
-    name2 = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","वड","उंबर","आभूटा","जांभुळ","आंबा","पिंपळ","निलगि","सिसम","बांबू",
-                                             "बदाम","करंज","चच","जास्वंद","बेल","अंजन","पाचपत्री","लिंबू","कविट","उपलब्ध नाही"])
+    name2 = st.selectbox("झाडाचे नाव निवडा",["","कडू लिंब","कविट","वड","आंबा","पिंपळ","निलगि","सिसम","उपलब्ध नाही"])
     if name2 == "उपलब्ध नाही":
         english_text = st.text_input("झाडाचे नाव टाका")
         name2 = translate_to_marathi(english_text)
@@ -283,20 +282,14 @@ elif plot == "सुमरसिंग":
 
 
 
-bar = st.sidebar.selectbox("संपूर्ण डेटा पाहण्यासाठी प्लॉट निवडा",["","सरिता पॉलिमर्स","नारायण", "लक्ष्मी ऍग्रो","राकेश ब्रिक्स","सुमरसिंग" ])
+bar = st.sidebar.selectbox("संपूर्ण डेटा पाहण्यासाठी प्लॉट निवडा",["","सरिता पॉलिमर्स","नारायण", "लक्ष्मी ऍग्रो","राकेश ब्रिक्स","सुमरसिंग","संपूर्ण डेटा"])
 
 if bar == "सरिता पॉलिमर्स":
     st.sidebar.write("निवडले :- सरिता पॉलिमर्स")
     db1 = deta.Base("sarita")
     b = st.sidebar.button("पहा")
     if b:
-        df = pd.DataFrame(db1.fetch().items)
-        st.sidebar.write(df)
-        # st.dataframe(df)
-        st.sidebar.download_button("Download csv",
-                   df.to_csv(),
-                   file_name="सरिता पॉलिमर्स.csv",
-                   mime="text/csv")
+        st.sidebar.write(pd.DataFrame(db1.fetch().items))
         
 
 elif bar == "नारायण":
@@ -304,13 +297,7 @@ elif bar == "नारायण":
     db1 = deta.Base("narayan")
     b = st.sidebar.button("पहा")
     if b:
-        df = pd.DataFrame(db1.fetch().items)
-        st.sidebar.write(df)
-        # st.dataframe(df)
-        st.sidebar.download_button("Download csv",
-                   df.to_csv(),
-                   file_name="नारायण.csv",
-                   mime="text/csv")
+        st.sidebar.write(pd.DataFrame(db1.fetch().items))
 
     
 elif bar == "लक्ष्मी ऍग्रो":
@@ -318,26 +305,14 @@ elif bar == "लक्ष्मी ऍग्रो":
     db1 = deta.Base("laxmi")
     b = st.sidebar.button("पहा")
     if b:
-        df = pd.DataFrame(db1.fetch().items)
-        st.sidebar.write(df)
-        # st.dataframe(df)
-        st.sidebar.download_button("Download csv",
-                   df.to_csv(),
-                   file_name="लक्ष्मी ऍग्रो.csv",
-                   mime="text/csv")
+        st.sidebar.write(pd.DataFrame(db1.fetch().items))
 
 elif bar == "राकेश ब्रिक्स":
     st.sidebar.write("निवडले :- राकेश ब्रिक्स")
     db1 = deta.Base("rakesh")
     b = st.sidebar.button("पहा")
     if b:
-        df = pd.DataFrame(db1.fetch().items)
-        st.sidebar.write(df)
-        # st.dataframe(df)
-        st.sidebar.download_button("Download csv",
-                   df.to_csv(),
-                   file_name="राकेश ब्रिक्स.csv",
-                   mime="text/csv")
+        st.sidebar.write(pd.DataFrame(db1.fetch().items))
 
 elif bar == "सुमरसिंग":
     st.sidebar.write("निवडले :- सुमरसिंग")
@@ -346,11 +321,37 @@ elif bar == "सुमरसिंग":
     if b:
         df = pd.DataFrame(db1.fetch().items)
         st.sidebar.write(df)
-        # st.dataframe(df)
-        st.sidebar.download_button("Download csv",
-                   df.to_csv(),
-                   file_name="सुमरसिंग.csv",
-                   mime="text/csv")
+        csv = df.to_csv(file_name="सुमरसिंग.csv")
+        st.download_button(
+            label="Download data as CSV",
+            data=csv,
+            
+            mime='text/csv',
+        )
+
+elif bar == "संपूर्ण डेटा":
+    plot = ["sarita","laxmi","rakesh","sumershing"]
+    st.sidebar.write("निवडले :- सुमरसिंग")
+    b = st.sidebar.button("पहा")
+    if b:
+        df =  pd.DataFrame(df1.fetch().items)
+        for i in plot:
+            data = deta.Base(i)
+            df1 = pd.DataFrame(data.fetch().items)
+            df = pd.concat([df,df1],ignore_index=True)
+            print(i,"\n",df)
+        df.drop("key",axis=1,inplace=True)
+        df.index += 1  
+        df = df.rename_axis('key')
+        st.sidebar.write(df)
+        csv = df.to_csv(file_name="सुमरसिंग.csv")
+        st.download_button(
+            label="Download data as CSV",
+            data=csv,
+            mime='text/csv',
+        )
+
+ 
 
 
 
