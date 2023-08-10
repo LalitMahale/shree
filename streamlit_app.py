@@ -358,7 +358,7 @@ elif bar == "सुमरसिंग":
 
 elif bar == "संपूर्ण डेटा":
     plot = ["sarita","laxmi","rakesh","sumershing"]
-    st.sidebar.write("निवडले :- सुमरसिंग")
+    st.sidebar.write("निवडले :- संपूर्ण डेटा")
     b = st.sidebar.button("पहा")
     
     if b:
