@@ -3,14 +3,33 @@ import streamlit as st
 import pandas as pd
 from deta import Deta
 import os
+# from dotenv import load_dotenv
+# load_dotenv(".env")
+# key = os.getenv("key")
+key = "d04zgljxeva_WbFhwMJowwp3B7vNgdQViDoDqxfMRFVc"
 
-deta = Deta( "d04zgljxeva_WbFhwMJowwp3B7vNgdQViDoDqxfMRFVc")
+deta = Deta(key)
 translator = Translator()
 
 def push_data(db,name,heigth,sr):
     # st.write(db.fetch().count)
     return db.put({"key":sr,"झाडाचे_नाव":name,"उंची":str(heigth)})
 
+# def update(db,key,name,heigth):
+#     # st.write(db.fetch().count)
+#     return db1.update(updates={"झाडाचे_नाव":name,"उंची":str(height)},key=str(key))
+
+# def update(db):
+#     st.write("Please fill out the form below:")
+#     key = st.number_input("Key",step=1,min_value=1)
+#     height = st.number_input(" झाडांची उंची ",step=1,min_value=1)
+#     name = st.selectbox(" झाडाचे नाव निवडा ",["","कडूलिंब","कविट","वड","आंबा","पिंपळ","नीलगीरी","शिसम","उपलब्ध नाही"])
+
+#     # message = st.text_area("Message")
+#     submit_button = st.button("बदल जतन करा")
+#     if submit_button:
+#         db.update(updates={"झाडाचे_नाव":name,"उंची":str(height)},key=str(key))
+#         st.success("बदल यशस्वीरित्या जतन केले!")
 
 def photo(name):
     data = {"कडूलिंब":"./images/neem.jpg","पिंपळ":"./images/pimpal.jpeg","वड":"./images/vad.jpeg",
@@ -98,6 +117,16 @@ if plot == "सरिता पॉलिमर्स":
         else:
             st.warning("कृपया योग्य माहिती प्रविष्ट करा")
 
+
+    # if button_update :
+    #     update(db = db1)
+        # key = st.number_input("Key",step=1,min_value=1)
+        # u = st.button("बदल करा ")
+
+        # if u == True:
+        #     update(db1,key,name,height)
+        #     st.success("बदल केला")
+        #     st.write(pd.DataFrame(db1.get(str(key)),index=[0]))
 
   
 
@@ -353,9 +382,10 @@ elif bar == "संपूर्ण डेटा":
                 data = deta.Base(i)
                 df1 = pd.DataFrame(data.fetch().items)
                 df = pd.concat([df,df1],ignore_index=True)
-            df.drop("key",axis=0,inplace=True)
-            df.index += 1  
-            df = df.rename_axis('key')
+            if "key" in df.columns:
+                df.drop("key",axis=1,inplace=True)
+                df = df.rename_axis('key')
+                df.index += 1  
             st.sidebar.write(df)
             # csv = df.to_csv("संपूर्ण डेटा.csv")
             st.sidebar.download_button("Download csv",
