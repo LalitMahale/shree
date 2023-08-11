@@ -3,10 +3,9 @@ import streamlit as st
 import pandas as pd
 from deta import Deta
 import os
-# from dotenv import load_dotenv
-# load_dotenv(".env")
-# key = os.getenv("key")
-key = "d04zgljxeva_WbFhwMJowwp3B7vNgdQViDoDqxfMRFVc"
+from dotenv import load_dotenv
+load_dotenv(".env")
+key = os.getenv("key")
 
 deta = Deta(key)
 translator = Translator()
@@ -15,25 +14,13 @@ def push_data(db,name,heigth,sr):
     # st.write(db.fetch().count)
     return db.put({"key":sr,"झाडाचे_नाव":name,"उंची":str(heigth)})
 
-# def update(db,key,name,heigth):
-#     # st.write(db.fetch().count)
-#     return db1.update(updates={"झाडाचे_नाव":name,"उंची":str(height)},key=str(key))
-
-def update(db):
-    st.write("Please fill out the form below:")
-    key = st.number_input("Key",step=1,min_value=1)
-    height = st.number_input(" झाडांची उंची ",step=1,min_value=1)
-    name = st.selectbox(" झाडाचे नाव निवडा ",["","कडूलिंब","कविट","वड","आंबा","पिंपळ","नीलगीरी"," शिसम","उपलब्ध नाही"])
-
-    # message = st.text_area("Message")
-    submit_button = st.button("बदल जतन करा")
-    if submit_button:
-        db.update(updates={"झाडाचे_नाव":name,"उंची":str(height)},key=str(key))
-        st.success("बदल यशस्वीरित्या जतन केले!")
 
 def photo(name):
-    data = {"कडूलिंब":"neem.jpg","पिंपळ":"pimpal.jpeg","वड":"vad.jpeg","आंबा":"mango.jpeg","नीलगीरी":"nilgari.jpg"," शिसम":"nilgari.jpg",
-            "कविट":"kavit.jpg"}
+    data = {"कडूलिंब":"./images/neem.jpg","पिंपळ":"./images/pimpal.jpeg","वड":"./images/vad.jpeg",
+            "आंबा":"./images/mango.jpeg","नीलगीरी":"./images/nilgari.jpg","शिसम":"./images/nilgari.jpg",
+            "कविट":"./images/kahit.jpg","बाभूळ":"./images/babhul.jpg","मोह":"./images/moha.jpg"," चिंच":"./images/chinch.jpg","सप्तपरणी":"./images/7_leaf.jpg","सेतुक":"./images/setuk.jpg",
+             "बदाम":"./images/badam.jpg","बेल":"./images/bel.jpg","कहीट":"./images/kahit.jpg","इंग्रजी चिंच":"./images/english chinch.jpg","भोकर":"./images/bhokar.jpg","पेरू":"./images/peru.jpg","चिंचोळ":"./images/chinchola.jpg","उंबर":"./images/umber.jpg","आपटे":"./images/apate.jpg","सीताफल":"./images/sitaphal.jpg",
+            "जांभुळ":"./images/jambul.jpg","आभोटा":"./images/aabhuta.jpg","आवळा":"./images/avala.jpg"}
     st.image(data[name])
     st.write(name)
 
@@ -71,14 +58,14 @@ st.markdown("<h1 style='text-align: center; font-size: 28px;'>||  जय जय 
 st.markdown("<h1 style='text-align: center; font-size: 28px;'> <i class='fa fa-tree'></i> वृक्ष सर्वेक्षण  <i class='fa fa-tree'></i> </h1>", unsafe_allow_html=True)
 
 
-plot = st.selectbox("प्लॉट निवडा",["","सरिता पॉलिमर्स","नारायण", "लक्ष्मी ऍग्रो","राकेश ब्रिक्स","सुमरसिंग" ])
+plot = st.selectbox("प्लॉट निवडा",["","सरिता पॉलिमर्स","नारायण", "लक्ष्मी ऍग्रो","राकेश ब्रिक्स","सुमरसिंग" ], format_func=str)
 
 
 if plot == "सरिता पॉलिमर्स":
     st.title("सरिता पॉलिमर्स")
     db1 = deta.Base("sarita")
     name1 = st.selectbox("झाडाचे नाव निवडा",["","कडूलिंब","कविट","वड","आंबा","पिंपळ","मोह","करंज","बेल","चिंच","पळस","उंबर",
-                                             "देवकापूस","जांभूळ","आभूटा"," शिसम","इंग्रजी चिंच","महू","आभुळशेंग","शिसम / वड","उपलब्ध नाही"])
+                                             "देवकापूस","जांभूळ","आभूटा","शिसम","इंग्रजी चिंच","महू","आभुळशेंग","शिसम / वड","उपलब्ध नाही"])
     if name1 == "उपलब्ध नाही":
         english_text = st.text_input("झाडाचे नाव टाका")
         name1 = translate_to_marathi(english_text)
@@ -94,7 +81,9 @@ if plot == "सरिता पॉलिमर्स":
 
         show_form = col1.button("जतन करा")
         # button_update = col2.button("बदल करा")
-        selected_option = col3.selectbox("झाडाचे फोटो पहा", ["","कडूलिंब","कविट","वड","आंबा","पिंपळ","नीलगीरी"," शिसम"])
+        selected_option = col3.selectbox("झाडाचे फोटो पहा", ["","कडूलिंब","बाभूळ","वड","आंबा","पिंपळ","नीलगीरी","मोह"," चिंच","सप्तपरणी","सेतुक"
+                                             ,"बदाम","बेल","कहीट","इंग्रजी चिंच","भोकर","पेरू","चिंचोळ","उंबर","शिसम","आपटे","सीताफल",
+                                             "जांभुळ","आभोटा","आवळा"])
         if selected_option != "":
             photo(selected_option)
 
@@ -113,16 +102,6 @@ if plot == "सरिता पॉलिमर्स":
             st.warning("कृपया योग्य माहिती प्रविष्ट करा")
 
 
-    # if button_update :
-    #     update(db = db1)
-        # key = st.number_input("Key",step=1,min_value=1)
-        # u = st.button("बदल करा ")
-
-        # if u == True:
-        #     update(db1,key,name,height)
-        #     st.success("बदल केला")
-        #     st.write(pd.DataFrame(db1.get(str(key)),index=[0]))
-
   
 
 
@@ -130,7 +109,7 @@ if plot == "सरिता पॉलिमर्स":
 elif plot == "नारायण":
     st.title("नारायण")
     db2 = deta.Base("narayan")
-    name2 = st.selectbox("झाडाचे नाव निवडा",["","कडूलिंब","वड","उंबर","आभूटा","जांभुळ","पिंपळ"," शिसम","बांबू",
+    name2 = st.selectbox("झाडाचे नाव निवडा",["","कडूलिंब","वड","उंबर","आभूटा","जांभुळ","पिंपळ","शिसम","बांबू",
                                              "बदाम","करंज","चिंच","जास्वंद","बेल","अंजन","पाचपत्री","लिंबू","उपलब्ध नाही"])
     if name2 == "उपलब्ध नाही":
         english_text = st.text_input("झाडाचे नाव टाका")
@@ -147,7 +126,9 @@ elif plot == "नारायण":
 
         show_form2 = col1.button("जतन करा")
         # button_update = col2.button("बदल करा")
-        selected_option = col3.selectbox("झाडाचे फोटो पहा", ["","कडूलिंब","कविट","वड","आंबा","पिंपळ","नीलगीरी"," शिसम"])
+        selected_option = col3.selectbox("झाडाचे फोटो पहा", ["","कडूलिंब","बाभूळ","वड","आंबा","पिंपळ","नीलगीरी","मोह"," चिंच","सप्तपरणी","सेतुक"
+                                             "बदाम","बेल","कहीट","इंग्रजी चिंच","भोकर","पेरू","चिंचोळ","उंबर","शिसम","आपटे","सीताफल",
+                                             "जांभुळ","आभोटा","आवळा"])
         if selected_option != "":
             photo(selected_option)
 
@@ -189,7 +170,9 @@ elif plot == "लक्ष्मी ऍग्रो":
 
         show_form3 = col1.button("जतन करा")
         # button_update = col2.button("बदल करा")
-        selected_option = col3.selectbox("झाडाचे फोटो पहा", ["","कडूलिंब","कविट","वड","आंबा","पिंपळ","नीलगीरी"," शिसम"])
+        selected_option = col3.selectbox("झाडाचे फोटो पहा", ["","कडूलिंब","बाभूळ","वड","आंबा","पिंपळ","नीलगीरी","मोह"," चिंच","सप्तपरणी","सेतुक"
+                                             "बदाम","बेल","कहीट","इंग्रजी चिंच","भोकर","पेरू","चिंचोळ","उंबर","शिसम","आपटे","सीताफल",
+                                             "जांभुळ","आभोटा","आवळा"])
         if selected_option != "":
             photo(selected_option)
 
@@ -211,7 +194,7 @@ elif plot == "राकेश ब्रिक्स":
     st.title("राकेश ब्रिक्स")
     db4 = deta.Base("rakesh")
     name4 = st.selectbox("झाडाचे नाव निवडा",["","कडूलिंब","कविट","वड","उंबर","बोर","करंज","बेहडा","मोह","आभुळशेंग","चिंच","चिंचोळ","सप्तपरणी","जांभुळ",
-                                             "आभुळशेंग","सुबाभूळ","चिकू","देवकापूस","आपटे","आवळा","आभूटा","पिंपळ","नीलगीरी"," शिसम","","शिसम / सुबाभूळ","उपलब्ध नाही"])
+                                             "आभुळशेंग","सुबाभूळ","चिकू","देवकापूस","आपटे","आवळा","आभूटा","पिंपळ","नीलगीरी","शिसम","शिसम / सुबाभूळ","उपलब्ध नाही"])
     if name4 == "उपलब्ध नाही":
         english_text = st.text_input("झाडाचे नाव टाका")
         name4= translate_to_marathi(english_text)
@@ -228,7 +211,9 @@ elif plot == "राकेश ब्रिक्स":
 
         show_form4 = col1.button("जतन करा")
         # button_update = col2.button("बदल करा")
-        selected_option = col3.selectbox("झाडाचे फोटो पहा", ["","कडूलिंब","कविट","वड","आंबा","पिंपळ","नीलगीरी"," शिसम"])
+        selected_option = col3.selectbox("झाडाचे फोटो पहा", ["","कडूलिंब","बाभूळ","वड","आंबा","पिंपळ","नीलगीरी","मोह"," चिंच","सप्तपरणी","सेतुक"
+                                             "बदाम","बेल","कहीट","इंग्रजी चिंच","भोकर","पेरू","चिंचोळ","उंबर","शिसम","आपटे","सीताफल",
+                                             "जांभुळ","आभोटा","आवळा"])
         if selected_option != "":
             photo(selected_option)
 
@@ -249,7 +234,7 @@ elif plot == "राकेश ब्रिक्स":
 elif plot == "सुमरसिंग":
     st.title("सुमरसिंग")
     db5 = deta.Base("sumershing")
-    name5 = st.selectbox("झाडाचे नाव निवडा",["","कडूलिंब","आभूटा","मोह","वड","आंबा","करंज","सप्तपरणी","सीताफल"," शिसम","उपलब्ध नाही"])
+    name5 = st.selectbox("झाडाचे नाव निवडा",["","कडूलिंब","आभूटा","मोह","वड","आंबा","करंज","सप्तपरणी","सीताफल","शिसम","उपलब्ध नाही"])
     if name5 == "उपलब्ध नाही":
         english_text = st.text_input("झाडाचे नाव टाका")
         name5 = translate_to_marathi(english_text)
@@ -266,7 +251,9 @@ elif plot == "सुमरसिंग":
 
         show_form5 = col1.button("जतन करा")
         # button_update = col2.button("बदल करा")
-        selected_option = col3.selectbox("झाडाचे फोटो पहा", ["","कडूलिंब","कविट","वड","आंबा","पिंपळ","नीलगीरी"," शिसम"])
+        selected_option = col3.selectbox("झाडाचे फोटो पहा", ["","कडूलिंब","बाभूळ","वड","आंबा","पिंपळ","नीलगीरी","मोह"," चिंच","सप्तपरणी","सेतुक"
+                                             "बदाम","बेल","कहीट","इंग्रजी चिंच","भोकर","पेरू","चिंचोळ","उंबर","शिसम","आपटे","सीताफल",
+                                             "जांभुळ","आभोटा","आवळा"])
         if selected_option != "":
             photo(selected_option)
 
@@ -362,21 +349,24 @@ elif bar == "संपूर्ण डेटा":
     b = st.sidebar.button("पहा")
     
     if b:
-        df1 = deta.Base("narayan")
-        df =  pd.DataFrame(df1.fetch().items)
-        for i in plot:
-            data = deta.Base(i)
-            df1 = pd.DataFrame(data.fetch().items)
-            df = pd.concat([df,df1],ignore_index=True)
-        df.drop("key",axis=1,inplace=True)
-        df.index += 1  
-        df = df.rename_axis('key')
-        st.sidebar.write(df)
-        # csv = df.to_csv("संपूर्ण डेटा.csv")
-        st.sidebar.download_button("Download csv",
-                   df.to_csv(),
-                   file_name="संपूर्ण डेटा.csv",
-                   mime="text/csv")
+        try:
+            df1 = deta.Base("narayan")
+            df =  pd.DataFrame(df1.fetch().items)
+            for i in plot:
+                data = deta.Base(i)
+                df1 = pd.DataFrame(data.fetch().items)
+                df = pd.concat([df,df1],ignore_index=True)
+            df.drop("key",axis=0,inplace=True)
+            df.index += 1  
+            df = df.rename_axis('key')
+            st.sidebar.write(df)
+            # csv = df.to_csv("संपूर्ण डेटा.csv")
+            st.sidebar.download_button("Download csv",
+                    df.to_csv(),
+                    file_name="संपूर्ण डेटा.csv",
+                    mime="text/csv")
+        except:
+            st.sidebar.warning("No data is present")
 
 
 
@@ -393,18 +383,3 @@ with contact_container:
                     "<button style='padding: 10px 20px;'>संपर्क साधा</button>"
                     "</a></div>", unsafe_allow_html=True)
 
-    # Create a Spacer to push the content up and create space for the footer
-# st.markdown("<div style='height: 20vh'></div>", unsafe_allow_html=True)
-
-# # Create a container to hold the buttons
-# buttons_container = st.container()
-# with buttons_container:
-#     # Right-align the buttons at the bottom
-#     st.markdown("<div style='position: fixed; bottom: 10px; right: 10px; text-align: right;'>"
-#                 "<a href='https://example.com/contact' target='_blank'>"
-#                 "<button style='padding: 10px 20px; margin-right: 10px;'>Contact Us</button>"
-#                 "</a>"
-#                 "<a href='https://example.com/another-link' target='_blank'>"
-#                 "<button style='padding: 10px 20px;'>Contact Us 2</button>"
-#                 "</a>"
-#                 "</div>", unsafe_allow_html=True)
