@@ -3,11 +3,8 @@ import streamlit as st
 import pandas as pd
 from deta import Deta
 import os
-from dotenv import load_dotenv
-load_dotenv(".env")
-key = os.getenv("key")
 
-deta = Deta(key)
+deta = Deta( "d04zgljxeva_WbFhwMJowwp3B7vNgdQViDoDqxfMRFVc")
 translator = Translator()
 
 def push_data(db,name,heigth,sr):
