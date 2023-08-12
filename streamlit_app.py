@@ -2,9 +2,9 @@ from googletrans import Translator
 import streamlit as st
 import pandas as pd
 from deta import Deta
-from streamlit_lottie import st_lottie
-import os
-import requests
+# from streamlit_lottie import st_lottie
+# import os
+# import requests
 # from dotenv import load_dotenv
 # load_dotenv(".env")
 # key = os.getenv("key")
