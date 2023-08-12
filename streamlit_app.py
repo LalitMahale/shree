@@ -102,6 +102,7 @@ if plot == "सरिता पॉलिमर्स":
             df1 = pd.DataFrame(db1.fetch().items)
             df1.key = df1.key.astype("int")
             df1.sort_values("key",inplace=True)
+            df1.set_index("key",inplace=True)
             st.write(df1.tail(5))
         else:
             st.warning("कृपया योग्य माहिती प्रविष्ट करा")
@@ -145,8 +146,9 @@ elif plot == "नारायण":
             # st.write(db1.fetch().items)
             df2 = pd.DataFrame(db2.fetch().items)
             st.write(type(df2["key"]))
-            # df2["key"] = df2["key"].astype("int")
-            # df2.sort_values("key",inplace=True)
+            df2["key"] = df2["key"].astype("int")
+            df2.sort_values("key",inplace=True)
+            df2.set_index("key",inplace=True)
             st.write(pd.DataFrame(df2.tail(5)))        
         else:
             st.warning("कृपया योग्य माहिती प्रविष्ट करा")
@@ -194,6 +196,7 @@ elif plot == "लक्ष्मी ऍग्रो":
             df3 = pd.DataFrame(db3.fetch().items)
             df3.key = df3.key.astype("int")
             df3.sort_values("key",inplace=True)
+            df3.set_index("key",inplace=True)
             st.write(pd.DataFrame(df3.tail(5)))        
         else:
             st.warning("कृपया योग्य माहिती प्रविष्ट करा")
@@ -238,6 +241,7 @@ elif plot == "राकेश ब्रिक्स":
             df4 = pd.DataFrame(db4.fetch().items)
             df4.key = df4.key.astype("int")
             df4.sort_values("key",inplace=True)
+            df4.set_index("key",inplace=True)
             st.write(pd.DataFrame(df4.tail(5)))  
         else:
             st.warning("कृपया योग्य माहिती प्रविष्ट करा")
@@ -281,6 +285,7 @@ elif plot == "सुमरसिंग":
             df5 = pd.DataFrame(db5.fetch().items)
             df5.key = df5.key.astype("int")
             df5.sort_values("key",inplace=True)
+            df5.set_index("key",inplace=True)
             st.write(pd.DataFrame(df5.tail(5)))  
         else:
             st.warning("कृपया योग्य माहिती प्रविष्ट करा")
@@ -297,8 +302,10 @@ if bar == "सरिता पॉलिमर्स":
     if b:
         df = pd.DataFrame(db1.fetch().items)
         if "key" in df.columns:
+            df.key = df.key.astype("int")
+            df.sort_values("key",inplace=True)
+            df.set_index("key",inplace=True)
             st.sidebar.write(df)
-            # st.dataframe(df)
             st.sidebar.download_button("Download csv",
                     df.to_csv(),
                     file_name="सरिता पॉलिमर्स.csv",
@@ -316,6 +323,7 @@ elif bar == "नारायण":
         if "key" in df.columns:
             df.key = df.key.astype("int")
             df.sort_values("key",inplace=True)
+            df.set_index("key",inplace=True)
             st.sidebar.write(df)
             st.sidebar.download_button("Download csv",
                     df.to_csv(),
@@ -334,6 +342,7 @@ elif bar == "लक्ष्मी ऍग्रो":
         if "key" in df.columns:
             df.key = df.key.astype("int")
             df.sort_values("key",inplace=True)
+            df.set_index("key",inplace=True)
             st.sidebar.write(df)
             st.sidebar.download_button("Download csv",
                     df.to_csv(),
@@ -351,6 +360,7 @@ elif bar == "राकेश ब्रिक्स":
         if "key" in df.columns:
             df.key = df.key.astype("int")
             df.sort_values("key",inplace=True)
+            df.set_index("key",inplace=True)
             st.sidebar.write(df)
             st.sidebar.download_button("Download csv",
                     df.to_csv(),
@@ -368,6 +378,7 @@ elif bar == "सुमरसिंग":
         if "key" in df.columns:
             df.key = df.key.astype("int")
             df.sort_values("key",inplace=True)
+            df.set_index("key",inplace=True)
             st.sidebar.write(df)
             st.sidebar.download_button("Download csv",
                    df.to_csv(),
@@ -393,6 +404,7 @@ elif bar == "संपूर्ण डेटा":
             if "key" in df.columns:
                 df.key = df.key.astype("int")
                 df.sort_values("key",inplace=True)
+                df.set_index("key",inplace=True)
                 st.sidebar.write(df)
             # csv = df.to_csv("संपूर्ण डेटा.csv")
                 st.sidebar.download_button("Download csv",
@@ -416,6 +428,6 @@ with contact_container:
         # Right-align the button at the bottom
         st.markdown("<div style='position: fixed; bottom: 10px; right: 100px; text-align: right;'>"
                     "<a href='tel:+918087830153' target='_blank'>"
-                    "<button style='padding: 10px 20px;'>संपर्क साधा</button>"
+                    "<button style='padding: 10px 20px;'>📞 संपर्क साधा</button>"
                     "</a></div>", unsafe_allow_html=True)
 
