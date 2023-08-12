@@ -6,6 +6,14 @@ from deta import Deta
 # from dotenv import load_dotenv
 # load_dotenv(".env")
 # key = os.getenv("key")
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
 key = "d04zgljxeva_WbFhwMJowwp3B7vNgdQViDoDqxfMRFVc"
 
 deta = Deta(key)
