@@ -434,7 +434,7 @@ st.markdown("<div style='height: 15vh'></div>", unsafe_allow_html=True)
 contact_container = st.container()
 with contact_container:
         # Right-align the button at the bottom
-        st.markdown("<div style='position: fixed; bottom: 0px; right: 0px; text-align: right;'>"
+        st.markdown("<div style='position: fixed; bottom: 10px; right: 100px; text-align: right;'>"
                     "<a href='tel:+918087830153' target='_blank'>"
                     "<button style='padding: 10px 20px;'>📞 संपर्क साधा</button>"
                     "</a></div>", unsafe_allow_html=True)
